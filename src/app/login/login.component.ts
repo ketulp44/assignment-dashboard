@@ -10,20 +10,20 @@ import { routerNgProbeToken } from '@angular/router/src/router_module';
 })
 export class LoginComponent implements OnInit {
 
-  form= new FormGroup({
-    userName: new FormControl('',[Validators.required],),
-    password: new FormControl('',Validators.required,)
+  form = new FormGroup({
+    userName: new FormControl('', [ Validators.required], ),
+    password: new FormControl('', Validators.required, )
 
   });
-  constructor(private auth: AuthService,private route: Router) { }
+  constructor(private auth: AuthService, private route: Router) { }
 
   ngOnInit() {
   }
   onClickLogIn(): void{
     console.log('inside login start');
       let isLogged: boolean = this.auth.logIn(
-        { username:this.form.get('userName'),
-         password: this.form.get('password')  });
-         console.log('inside login end');     
+        { username: <string>this.form.get('userName').value,
+         password: <string>this.form.get('password').value  });
+         console.log('inside login end');
   }
 }

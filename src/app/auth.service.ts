@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-const users = [
+import {User} from './user';
+const users: User[] = [
   {username : "ketulp44", password: "ketul8652"}
 ];
 // const authenticated = false;
@@ -9,28 +10,19 @@ const users = [
 export class AuthService {
   authenticated: boolean = false;
   constructor() { }
-  
-  logIn(user : any): boolean{
+
+  logIn(user: User): boolean{
     console.log('authenticated ' + this.authenticated);
-    let tmp = users.filter((usr)=>{
-      if(usr.username=== <string>user.username && usr.password===<string>user.password){
-        console.log('authenticated if ' + this.authenticated);
+    for (const usr of users) {
+      if ( usr.username === user.username && usr.password === user.password){
+        this.authenticated = true;
         return true;
-      }else{
-        console.log('authenticated else' + this.authenticated);
-        return false;
       }
-    });
-    if(tmp.length=== 1){
-      this.authenticated = true;
-      console.log('authenticated ' + this.authenticated);
-      return true;
-    }else{
-      return false;
     }
+    return false;
 
   }
-  isAuthenticated():boolean {
+  isAuthenticated(): boolean {
     return this.authenticated;
   }
 }
